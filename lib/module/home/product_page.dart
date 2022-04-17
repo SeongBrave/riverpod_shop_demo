@@ -1,6 +1,8 @@
 // Flutter imports:
 // Project imports:
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 // Package imports:
@@ -58,6 +60,8 @@ class ProductPage extends StatelessWidget {
       ),
       body: Consumer(
         builder: (context, ref, child) {
+          final streamAsyncValue = ref.watch(streamProvider(10));
+          print(streamAsyncValue);
           final state = ref.watch(productListProvider);
           return state.when(
             empty: () => const Text(
@@ -206,3 +210,8 @@ class ProductPage extends StatelessWidget {
     );
   }
 }
+
+final streamProvider =
+    StreamProvider.autoDispose.family<int, int>((ref, offset) {
+  return Stream.fromIterable([36 + offset, 72 + offset]);
+});
