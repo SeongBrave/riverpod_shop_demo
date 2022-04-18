@@ -17,7 +17,7 @@ class PoductAPI {
       receiveTimeout: 3000,
     ));
     var response = await dio.get(
-        'http://jsonplaceholder.typicode.com/photos?_start=$pageIndex&_limit=$pageSize');
+        'https://jsonplaceholder.typicode.com/photos?_start=$pageIndex&_limit=$pageSize');
     var modelList = List<ProductModel>.from(
         response.data.map((x) => ProductModel.fromJson(x)));
     return modelList;
